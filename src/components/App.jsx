@@ -22,15 +22,15 @@ class App extends Component {
 
     async getFilms() {
         const filmsUrl = 'https://ghibliapi.herokuapp.com/films';
-        let res = await fetch(filmsUrl);
-        let films = await res.json();
+        const res = await fetch(filmsUrl);
+        const films = await res.json();
         this.setState({ films });
     }
 
     async getPeople() {
         const peopleUrl = 'https://ghibliapi.herokuapp.com/people';
-        let res = await fetch(peopleUrl);
-        let people = await res.json();
+        const res = await fetch(peopleUrl);
+        const people = await res.json();
         this.setState({ people });
     }
 
