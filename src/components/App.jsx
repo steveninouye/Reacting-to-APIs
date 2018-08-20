@@ -20,30 +20,32 @@ class App extends Component {
         this.getPeople();
     }
 
-    getFilms() {
+    async getFilms() {
         const filmsUrl = 'https://ghibliapi.herokuapp.com/films';
-        fetch(filmsUrl)
-            .then((res) => res.json())
-            .then((films) => {
-                console.log(films);
-                this.setState({ films });
-            });
+        let res = await fetch(filmsUrl);
+        let films = await res.json();
+        this.setState({ films });
     }
 
-    getPeople() {
+    async getPeople() {
         const peopleUrl = 'https://ghibliapi.herokuapp.com/people';
-        fetch(peopleUrl)
-            .then((res) => res.json())
-            .then((people) => this.setState({ people }));
+        let res = await fetch(peopleUrl);
+        let people = await res.json();
+        this.setState({ people });
     }
 
     changeDisplay(display) {
-        if (display === 'people') {
-            this.setState({ display: <People people={this.state.people} /> });
-        } else if (display === 'films') {
-            this.setState({ display: <Films films={this.state.films} /> });
-        } else {
-            this.setState({ display: false });
+        switch (display) {
+            case 'people':
+                this.setState({
+                    display: <People people={this.state.people} />
+                });
+                break;
+            case 'films':
+                this.setState({ display: <Films films={this.state.films} /> });
+                break;
+            default:
+                this.setState({ display: false });
         }
     }
 
